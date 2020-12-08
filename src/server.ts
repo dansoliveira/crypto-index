@@ -7,10 +7,10 @@ const app = express();
 
 app.use(express.json());
 app.use('/api', routes);
-app.use(routes);
-
-app.get('/', (request, response) => {
-  return response.json({ message: 'Welcome do Crypto Index!' });
+app.use((request, response) => {
+  response.status(404).json({
+    message: 'Endpoint não encontrado',
+  });
 });
 
 app.listen(PORT, () => {
