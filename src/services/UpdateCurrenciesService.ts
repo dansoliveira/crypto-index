@@ -33,7 +33,7 @@ class UpdateCurrenciesService {
     try {
       const schema = yup.object().shape({
         currency: yup.string().required().oneOf(this.allowedCurrencies),
-        value: yup.number().required().integer().positive(),
+        value: yup.number().required().positive(),
       });
 
       await schema.validate({
