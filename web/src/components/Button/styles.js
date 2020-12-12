@@ -9,3 +9,6 @@ export const CustomButton = styled.button`
   height: 2rem;
 `;
 
+CustomButton.Secondary = styled(CustomButton)`
+  background-color: #C4C4C4;
+`;

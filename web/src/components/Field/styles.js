@@ -7,8 +7,23 @@ export const Input = styled.input`
   padding: 0 0.5rem;
 `;
 
+Input.Secondary = styled.span.attrs((props) => ({
+  role: 'textbox',
+  contentEditable: props.viewMode ? false : true,
+}))`
+  border: 1px solid #ccc;
+  background-color: #C4C4C4;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.2rem 1rem;
+`;
+
 export const Label = styled.p`
   margin-bottom: 0.2rem;
+`;
+
+Label.Secondary = styled(Label)`
+  text-align: center;
 `;
 
 export const FieldWrapper = styled.div`

@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Button from "../../components/Button";
@@ -9,6 +10,7 @@ import Form from "../../components/Form";
 import session from '../../repositories/session';
 
 const Login = () => {
+  const history = useHistory();
   const {
     register,
     handleSubmit
@@ -24,6 +26,7 @@ const Login = () => {
       });
 
       localStorage.setItem('token', response.data.token)
+      history.push('/');
     } catch (err) {
       const { message } = err.response.data;
 

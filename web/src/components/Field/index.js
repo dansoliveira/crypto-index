@@ -11,4 +11,25 @@ function Field({ label, labelProps, inputProps }) {
   );
 }
 
+Field.Secondary = function({ label, value, labelProps, inputProps }) {
+  return (
+    <FieldWrapper>
+      <Label.Secondary
+        {...labelProps}
+      >
+        {label}
+      </Label.Secondary>
+      <Input.Secondary
+        style={{
+          width: '100%',
+          maxWidth: 'max-content',
+        }}
+        suppressContentEditableWarning={true}
+        {...inputProps}
+      >
+        {value}
+      </Input.Secondary>
+    </FieldWrapper>
+  )
+}
 export default Field;
