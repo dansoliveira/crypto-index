@@ -52,7 +52,7 @@ class UpdateCurrenciesService {
     });
     const currenciesParsed: CurrenciesDTO = JSON.parse(currencies);
 
-    currenciesParsed[currency] = value;
+    currenciesParsed[currency] = value.toString();
 
     fs.writeFileSync(this.currenciesPath, JSON.stringify(currenciesParsed));
   }
