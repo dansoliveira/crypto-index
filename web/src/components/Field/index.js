@@ -13,7 +13,11 @@ function Field({ label, labelProps, inputProps }) {
 
 Field.Secondary = function({ label, value, labelProps, inputProps }) {
   return (
-    <FieldWrapper>
+    <FieldWrapper
+      style={{
+        width: 'auto',
+      }}
+    >
       <Label.Secondary
         {...labelProps}
       >

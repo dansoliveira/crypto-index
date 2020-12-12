@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-  width: 10.5rem;
   height: 2rem;
   border: 1px solid #000;
   padding: 0 0.5rem;
@@ -27,6 +26,7 @@ Label.Secondary = styled(Label)`
 `;
 
 export const FieldWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
