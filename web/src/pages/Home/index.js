@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Button from "../../components/Button";
@@ -8,6 +9,7 @@ import { OthersCurrencies } from "./styles";
 import bitcoinIndex from '../../repositories/bitcoinIndex';
 
 function Home() {
+  const history = useHistory();
   const [currencies, setCurrencies] = useState({});
   
   useEffect(() => {
@@ -27,7 +29,6 @@ function Home() {
   }
 
   function updateCurrencies(bitcoinRate) {
-    console.log(currencies);
     const newCurrencies = {};
     
     Object.values(currencies).forEach(currency => {
@@ -52,7 +53,11 @@ function Home() {
   
   return (
     <Container>
-      <Button.Secondary>
+      <Button.Secondary
+        onClick={() => {
+          history.push('/currencies/update');
+        }}
+      >
         Atualizar valor monetário
       </Button.Secondary>
       <Field.Secondary

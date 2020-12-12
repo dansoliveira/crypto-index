@@ -36,4 +36,49 @@ Field.Secondary = function({ label, value, labelProps, inputProps }) {
     </FieldWrapper>
   )
 }
+
+Field.InlineView = function({ label, value, labelProps, inputProps }) {
+  return (
+    <FieldWrapper
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        columnGap: '0.5rem',
+      }}
+    >
+      <Label
+        style={{
+          fontWeight: 'bold',
+        }}
+        {...labelProps}
+      >
+        {label}
+      </Label>
+      <span>
+        {value}
+      </span>
+    </FieldWrapper>
+  )
+}
+
+Field.Select = function({ label, value, labelProps, inputProps }) {
+  return (
+    <FieldWrapper>
+      <Label
+        {...labelProps}
+      >
+        {label}
+      </Label>
+      <Input
+        as='select'
+        {...inputProps}
+      >
+        {inputProps.options.map((opt, index) => (
+          <option key={index} value={opt.value}>{opt.label}</option>
+        ))}
+      </Input>
+    </FieldWrapper>
+  )
+}
+
 export default Field;
