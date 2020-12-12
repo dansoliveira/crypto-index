@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Button from "../../components/Button";
 import Container from "../../components/Container";
@@ -10,12 +11,20 @@ function Home() {
   const [currencies, setCurrencies] = useState({});
   
   useEffect(() => {
-    bitcoinIndex.get().then(response => {
-      const { data } = response;
+    fetchBitcoiIndex();
+  }, []);
+
+  async function fetchBitcoiIndex() {
+    try {
+      const { data } = await bitcoinIndex.get();
 
       setCurrencies(data.bpi);
-    });
-  }, []);
+    } catch (err) {
+      const { message } = err.response.data;
+
+      toast.error(message);
+    }
+  }
 
   function updateCurrencies(bitcoinRate) {
     console.log(currencies);
