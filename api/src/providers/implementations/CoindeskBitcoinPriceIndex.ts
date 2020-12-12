@@ -1,5 +1,5 @@
 import { INetwork } from '../../network/INetwork';
-import CurrencyService from '../../services/CurrencyService';
+import GetCurrenciesCalculatedService from '../../services/GetCurrenciesCalculatedService';
 import {
   IBitcoinPriceIndex,
   BitcoinCurrentPrice,
@@ -8,7 +8,7 @@ import {
 
 class CoindeskBitcoinPriceIndex implements IBitcoinPriceIndex {
   constructor(
-    private currencyService: CurrencyService,
+    private getCurrenciesCalculatedService: GetCurrenciesCalculatedService,
     private network: INetwork,
   ) {}
 
@@ -19,7 +19,9 @@ class CoindeskBitcoinPriceIndex implements IBitcoinPriceIndex {
 
     const { bpi }: Record<string, BitcoinPriceIndex> = bitcoinPrice;
 
-    const currencies = this.currencyService.execute(bpi.USD.rate_float);
+    const currencies = this.getCurrenciesCalculatedService.execute(
+      bpi.USD.rate_float,
+    );
     const bitcoinPriceIndex = {
       ...bpi,
       ...currencies,

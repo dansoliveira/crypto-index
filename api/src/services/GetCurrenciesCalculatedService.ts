@@ -10,7 +10,7 @@ interface CurrenciesDTO {
   [key: string]: string;
 }
 
-class GetCurrenciesService {
+class GetCurrenciesCalculatedService {
   private currenciesPath: string;
 
   private currenciesDescription: CurrenciesDescription;
@@ -59,4 +59,4 @@ class GetCurrenciesService {
   }
 }
 
-export default GetCurrenciesService;
+export default GetCurrenciesCalculatedService;
