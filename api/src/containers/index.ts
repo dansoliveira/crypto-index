@@ -27,9 +27,11 @@ container.registerSingleton<EnsureAuthenticateUserService>(
   EnsureAuthenticateUserService,
 );
 
+const bitcoinAPIUrl = process.env.BITCOIN_API_URL || '';
+
 container.registerInstance<INetwork>(
   'INetwork',
-  new AxiosNetwork('https://api.coindesk.com/v1/bpi'),
+  new AxiosNetwork(bitcoinAPIUrl),
 );
 
 container.registerSingleton<GetCurrenciesCalculatedService>(
