@@ -11,6 +11,12 @@ import bitcoinIndex from '../../repositories/bitcoinIndex';
 function Home() {
   const history = useHistory();
   const [currencies, setCurrencies] = useState({});
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      history.push('/login');
+    }
+  });
   
   useEffect(() => {
     fetchBitcoiIndex();
@@ -25,6 +31,10 @@ function Home() {
       const { message } = err.response.data;
 
       toast.error(message);
+
+      if (err.response.status === 401) {
+        history.push('/login');
+      }
     }
   }
 

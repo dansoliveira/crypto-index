@@ -1,5 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
+import PrivateRoute from "./PrivateRoute";
+
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import UpdateCurrencies from "../pages/UpdateCurrencies";
@@ -7,15 +9,15 @@ import UpdateCurrencies from "../pages/UpdateCurrencies";
 function Routes() {
   return (
     <Switch>
-      <Route path='/' exact>
-        <Home/>
-      </Route>
       <Route path='/login'>
         <Login/>
       </Route>
-      <Route path='/currencies/update'>
+      <PrivateRoute path='/' exact>
+        <Home/>
+      </PrivateRoute>
+      <PrivateRoute path='/currencies/update'>
         <UpdateCurrencies/>
-      </Route>
+      </PrivateRoute>
     </Switch>
   );
 }

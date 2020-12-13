@@ -4,6 +4,16 @@ const api = axios.create({
   baseURL: 'http://localhost:3333/api',
 });
 
+api.interceptors.response.use(function(response) {
+  return response;
+}, function(error) {
+  if (error.response.status === 401) {
+    localStorage.removeItem('token');
+  }
+
+  return Promise.reject(error);
+});
+
 const http = {
   get: ({ url, config }) => {
     return api.get(url, config );

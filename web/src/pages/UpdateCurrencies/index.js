@@ -27,6 +27,12 @@ function UpdateCurrencies() {
     }
   ]);
   const [currentOption, setCurrentOption] = useState({});
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      history.push('/login');
+    }
+  });
   
   useEffect(() => {
     fetchCurrencies();
@@ -51,6 +57,10 @@ function UpdateCurrencies() {
       const { message } = err.response.data;
 
       toast.error(message);
+
+      if (err.response.status === 401) {
+        history.push('/login');
+      }
     }
   }
 
@@ -80,6 +90,10 @@ function UpdateCurrencies() {
       const { message } = err.response.data;
 
       toast.error(message);
+
+      if (err.response.status === 401) {
+        history.push('/login');
+      }
     }
   }
 
