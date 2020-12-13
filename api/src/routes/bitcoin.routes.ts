@@ -1,17 +1,11 @@
 import { Router } from 'express';
-import AxiosNetwork from '../network/AxiosNetwork';
+import { container } from 'tsyringe';
 import CoindeskBitcoinPriceIndex from '../providers/implementations/CoindeskBitcoinPriceIndex';
-import GetCurrenciesCalculatedService from '../services/GetCurrenciesCalculatedService';
 import UpdateCurrenciesService from '../services/UpdateCurrenciesService';
 
 const bitcoinRouter = Router();
-const getCurrenciesCalculatedService = new GetCurrenciesCalculatedService();
-const updateCurrenciesService = new UpdateCurrenciesService();
-const network = new AxiosNetwork('https://api.coindesk.com/v1/bpi');
-const bitcoinPriceIndex = new CoindeskBitcoinPriceIndex(
-  getCurrenciesCalculatedService,
-  network,
-);
+const updateCurrenciesService = container.resolve(UpdateCurrenciesService);
+const bitcoinPriceIndex = container.resolve(CoindeskBitcoinPriceIndex);
 
 bitcoinRouter.get('/', async (request, response) => {
   const priceIndex = await bitcoinPriceIndex.getCurrentPrice();

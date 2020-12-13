@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import { INetwork } from '../../network/INetwork';
 import GetCurrenciesCalculatedService from '../../services/GetCurrenciesCalculatedService';
 import {
@@ -6,9 +7,12 @@ import {
   BitcoinPriceIndex,
 } from '../IBitcoinPriceIndex';
 
+@injectable()
 class CoindeskBitcoinPriceIndex implements IBitcoinPriceIndex {
   constructor(
+    @inject('GetCurrenciesCalculatedService')
     private getCurrenciesCalculatedService: GetCurrenciesCalculatedService,
+    @inject('INetwork')
     private network: INetwork,
   ) {}
 
