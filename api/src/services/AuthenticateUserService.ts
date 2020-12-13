@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import * as yup from 'yup';
 
 import { ICryptoProvider } from '../providers/ICryptoProvider';
@@ -7,8 +8,11 @@ interface AuthenticateUserDTO {
   password: number;
 }
 
+@injectable()
 class AuthenticateUserService {
-  constructor(private cryptoProvider: ICryptoProvider) {}
+  constructor(
+    @inject('ICryptoProvider') private cryptoProvider: ICryptoProvider,
+  ) {}
 
   public async execute({
     email,

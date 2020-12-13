@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
+import 'reflect-metadata';
 
+import './containers';
 import routes from './routes';
 
 const PORT = 3333;

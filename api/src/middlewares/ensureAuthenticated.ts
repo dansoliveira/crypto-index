@@ -1,25 +1,23 @@
 import { NextFunction, Request, Response } from 'express';
+import { container } from 'tsyringe';
+import EnsureAuthenticateUserService from '../services/EnsureAuthenticateUserService';
 
-export default function ensureAuthenticated(
+const ensureAuthenticatedUserService = container.resolve(
+  EnsureAuthenticateUserService,
+);
+
+export default async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction,
-): void {
-  const authHeader = request.headers.authorization;
+): Promise<void> {
+  const authHeader = request.headers.authorization || '';
 
-  if (!authHeader || authHeader.length !== 16) {
-    response.status(401).json({ message: 'Token inválido' });
-    return;
+  try {
+    await ensureAuthenticatedUserService.execute(authHeader);
+
+    next();
+  } catch (err) {
+    response.status(401).json({ message: err.message });
   }
-
-  const matchedToken: Array<string> = authHeader.match(/[a-zA-Z0-9]+/) || [];
-
-  const isValidFormat = matchedToken[0].length === 16;
-
-  if (!isValidFormat) {
-    response.status(401).json({ message: 'Token inválido' });
-    return;
-  }
-
-  next();
 }

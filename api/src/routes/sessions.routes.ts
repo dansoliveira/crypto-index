@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import CustomCryptoProvider from '../providers/implementations/CustomCryptoProvider';
+import { container } from 'tsyringe';
 import AuthenticateUserService from '../services/AuthenticateUserService';
 
 const sessionsRouter = Router();
-const cryptoProvider = new CustomCryptoProvider();
-const authenticateUserService = new AuthenticateUserService(cryptoProvider);
+const authenticateUserService = container.resolve(AuthenticateUserService);
 
 sessionsRouter.post('/', async (request, response) => {
   try {
